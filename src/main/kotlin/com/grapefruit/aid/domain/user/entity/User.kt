@@ -1,5 +1,6 @@
 package com.grapefruit.aid.domain.user.entity
 
+import com.grapefruit.aid.domain.user.presentation.dto.request.SignUpReqDto
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -12,4 +13,10 @@ class User (
     val password: String,
     @Column(nullable = false)
     val name: String
-)
+) {
+    constructor(signUpReqDto: SignUpReqDto): this(
+        id = signUpReqDto.id,
+        password = signUpReqDto.password,
+        name = signUpReqDto.name
+    )
+}
