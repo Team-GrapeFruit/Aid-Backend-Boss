@@ -1,4 +1,4 @@
-package com.grapefruit.aid.global.security.jwt
+package com.grapefruit.aid.global.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
