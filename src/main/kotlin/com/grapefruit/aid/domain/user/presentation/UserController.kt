@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/auth")
 class UserController(
     private val signUpService: SignUpService
 ) {
