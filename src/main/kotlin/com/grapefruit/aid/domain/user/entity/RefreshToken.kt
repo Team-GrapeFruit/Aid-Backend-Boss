@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.index.Indexed
 class RefreshToken (
     @Id
     @Indexed
-    val userId: Long,
+    val userId: String,
     @Indexed
     val token: String,
 )
