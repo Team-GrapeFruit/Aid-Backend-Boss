@@ -1,6 +1,11 @@
 package com.grapefruit.aid.global.exception
 
-data class ErrorResponse(
-    val message: String,
-    val status: Int
-)
+class ErrorResponse(errorCode: ErrorCode) {
+    private val message: String
+    private val status: Int
+
+    init {
+        message = errorCode.message
+        status = errorCode.status
+    }
+}

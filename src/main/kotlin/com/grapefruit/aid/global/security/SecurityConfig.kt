@@ -1,5 +1,7 @@
 package com.grapefruit.aid.global.security
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.grapefruit.aid.global.security.jwt.TokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -14,7 +16,9 @@ import org.springframework.web.cors.CorsUtils
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig {
+class SecurityConfig(
+    private val objectMapper: ObjectMapper
+) {
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
@@ -35,6 +39,11 @@ class SecurityConfig {
             .antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
             .antMatchers(HttpMethod.POST, "/auth").permitAll()
             .anyRequest().denyAll()
+
+            .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(CustomAuthenticationEntryPoint(objectMapper))
+
 
             .and().build()
 
