@@ -7,7 +7,11 @@ import com.grapefruit.aid.domain.user.service.TokenRefreshService
 import com.grapefruit.aid.global.security.exception.ExpiredTokenException
 import com.grapefruit.aid.global.security.exception.InvalidTokenException
 import com.grapefruit.aid.global.security.jwt.TokenProvider
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
+@Service
+@Transactional(rollbackFor = [Exception::class])
 class TokenRefreshServiceImpl(
     private val refreshTokenRepository: RefreshTokenRepository,
     private val tokenProvider: TokenProvider
