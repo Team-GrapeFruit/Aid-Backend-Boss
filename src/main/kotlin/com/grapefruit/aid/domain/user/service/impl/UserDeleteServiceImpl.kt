@@ -9,7 +9,11 @@ import com.grapefruit.aid.domain.user.service.UserDeleteService
 import com.grapefruit.aid.domain.user.util.UserUtil
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
+@Service
+@Transactional(rollbackFor = [Exception::class])
 class UserDeleteServiceImpl(
     private val userRepository: UserRepository,
     private val refreshTokenRepository: RefreshTokenRepository,
