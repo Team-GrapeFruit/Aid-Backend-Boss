@@ -1,6 +1,8 @@
 package com.grapefruit.aid.global.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.grapefruit.aid.global.config.FilterConfig
+import com.grapefruit.aid.global.filter.JwtRequestFilter
 import com.grapefruit.aid.global.security.jwt.TokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -11,13 +13,16 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.RequestMatcher
 import org.springframework.web.cors.CorsUtils
 
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
+    private val jwtRequestFilter: JwtRequestFilter,
+    private val tokenProvider: TokenProvider
 ) {
 
     @Bean
@@ -44,6 +49,8 @@ class SecurityConfig(
             .exceptionHandling()
             .authenticationEntryPoint(CustomAuthenticationEntryPoint(objectMapper))
 
+            .and()
+            .apply(FilterConfig(tokenProvider))
 
             .and().build()
 

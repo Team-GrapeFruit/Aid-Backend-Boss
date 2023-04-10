@@ -2,11 +2,13 @@ package com.grapefruit.aid.global.filter
 
 import com.grapefruit.aid.global.security.jwt.TokenProvider
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
+@Component
 class JwtRequestFilter(
     private val tokenProvider: TokenProvider
 ): OncePerRequestFilter() {
