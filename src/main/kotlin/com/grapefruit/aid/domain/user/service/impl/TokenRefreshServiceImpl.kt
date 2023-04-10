@@ -18,7 +18,7 @@ class TokenRefreshServiceImpl(
 ): TokenRefreshService {
     override fun execute(requestRefreshToken: String):TokenRefreshResDto {
         val requestRefreshToken: String = tokenProvider.parseToken(requestRefreshToken) ?: throw InvalidTokenException()
-        val id = tokenProvider.exactEmailFromRefreshToken(requestRefreshToken)
+        val id = tokenProvider.exactIdFromRefreshToken(requestRefreshToken)
         val existingRefreshToken = refreshTokenRepository.findByToken(requestRefreshToken) ?: throw ExpiredTokenException()
         if(existingRefreshToken.token != requestRefreshToken)
             throw InvalidTokenException()

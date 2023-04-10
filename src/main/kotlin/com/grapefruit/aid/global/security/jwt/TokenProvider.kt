@@ -42,7 +42,7 @@ class TokenProvider(
         return parseToken(token)
     }
 
-    fun exactEmailFromRefreshToken(refresh: String): String {
+    fun exactIdFromRefreshToken(refresh: String): String {
         return getTokenSubject(refresh, jwtProperties.refreshSecret)
     }
 

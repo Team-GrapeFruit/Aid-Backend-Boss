@@ -1,5 +1,6 @@
 package com.grapefruit.aid.domain.store.entity
 
+import com.grapefruit.aid.domain.store.presentation.dto.request.CreateStoreReqDto
 import com.grapefruit.aid.domain.user.entity.User
 import com.grapefruit.aid.global.entity.BaseIdEntity
 import javax.persistence.*
@@ -19,4 +20,11 @@ class Store (
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "user_id", nullable = false)
     val user: User
-): BaseIdEntity()
+): BaseIdEntity() {
+    constructor(createStoreReqDto: CreateStoreReqDto, user: User): this(
+        storeName = createStoreReqDto.storeName,
+        information = createStoreReqDto.information,
+        storeImgURL = createStoreReqDto.storeImgUrl,
+        user = user
+    )
+}
