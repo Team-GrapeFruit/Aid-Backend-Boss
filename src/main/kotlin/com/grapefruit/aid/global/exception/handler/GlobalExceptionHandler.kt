@@ -18,10 +18,7 @@ class GlobalExceptionHandler {
     fun globalExceptionHandler(request: HttpServletRequest, e: BasicException): ResponseEntity<ErrorResponse> {
         log.error(e.errorCode.message)
         log.error(request.requestURI)
-        val errorCode: ErrorCode = e.errorCode
-        return ResponseEntity(
-            ErrorResponse(status = errorCode.status, message = errorCode.message),
-            HttpStatus.valueOf(errorCode.status)
-        )
+        val errorResponse = ErrorResponse(e.errorCode)
+        return ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.valueOf(e.errorCode.status))
     }
 }

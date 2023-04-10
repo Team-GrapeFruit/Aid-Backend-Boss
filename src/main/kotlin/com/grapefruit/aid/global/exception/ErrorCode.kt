@@ -4,8 +4,8 @@ enum class ErrorCode(
     val message: String,
     val status: Int
 ) {
-    UNAUTHORIZED("권한이 없음", 401),
     PASSWORD_MISMATCH("비밀번호가 일치하지 않습니다", 400),
+    UNAUTHORIZED("권한이 없음", 401),
     EXPIRED_TOKEN("토큰 만료", 401),
     INVALID_TOKEN("토큰 변질", 401),
     STORE_NOT_FOUND("가게를 찾을 수 없습니다", 404),

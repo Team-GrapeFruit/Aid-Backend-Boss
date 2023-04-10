@@ -4,4 +4,5 @@ import com.grapefruit.aid.domain.user.entity.RefreshToken
 import org.springframework.data.repository.CrudRepository
 
 interface RefreshTokenRepository: CrudRepository<RefreshToken, Long> {
+    fun findByToken(refreshToken: String): RefreshToken?
 }
