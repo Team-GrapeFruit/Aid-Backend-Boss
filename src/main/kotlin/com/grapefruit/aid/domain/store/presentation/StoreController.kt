@@ -40,7 +40,7 @@ class StoreController(
     }
 
     @PatchMapping
-    fun modifyStore(modifyStoreReqDto: ModifyStoreReqDto): ResponseEntity<Void> {
+    fun modifyStore(@RequestBody @Valid modifyStoreReqDto: ModifyStoreReqDto): ResponseEntity<Void> {
         modifyStoreService.execute(modifyStoreReqDto)
         return ResponseEntity.noContent().build()
     }
