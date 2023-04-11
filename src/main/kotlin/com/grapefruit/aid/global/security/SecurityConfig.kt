@@ -45,6 +45,11 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST, "/auth").permitAll()
             .antMatchers(HttpMethod.PATCH, "/auth").permitAll()
             .antMatchers(HttpMethod.DELETE, "/auth").authenticated()
+
+            .antMatchers(HttpMethod.POST, "/store").authenticated()
+            .antMatchers(HttpMethod.GET, "/store").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/store").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/store").authenticated()
             .anyRequest().denyAll()
 
             .and()
