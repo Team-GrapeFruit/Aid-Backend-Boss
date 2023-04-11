@@ -6,6 +6,7 @@ import com.grapefruit.aid.global.entity.BaseIdEntity
 import javax.persistence.*
 
 @Entity
+@Table(name = "purchase")
 class Order(
     @Column(name = "quantity", nullable = false)
     val quantity: Long,
