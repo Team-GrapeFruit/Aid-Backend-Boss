@@ -1,6 +1,7 @@
 package com.grapefruit.aid.domain.store.entity
 
 import com.grapefruit.aid.domain.store.presentation.dto.request.CreateStoreReqDto
+import com.grapefruit.aid.domain.store.presentation.dto.request.ModifyStoreReqDto
 import com.grapefruit.aid.domain.user.entity.User
 import com.grapefruit.aid.global.entity.BaseIdEntity
 import javax.persistence.*
@@ -27,4 +28,15 @@ class Store (
         storeImgURL = createStoreReqDto.storeImgUrl,
         user = user
     )
+
+    fun update(modifyStoreReqDto: ModifyStoreReqDto): Store {
+        val store = Store(
+            storeName = modifyStoreReqDto.storeName,
+            information = modifyStoreReqDto.information,
+            storeImgURL = modifyStoreReqDto.storeImgUrl,
+            user = this.user
+        )
+        store.id = this.id
+        return store
+    }
 }
