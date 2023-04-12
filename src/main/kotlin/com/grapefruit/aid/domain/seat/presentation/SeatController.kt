@@ -3,9 +3,11 @@ package com.grapefruit.aid.domain.seat.presentation
 import com.grapefruit.aid.domain.seat.presentation.dto.request.CreateSeatReqDto
 import com.grapefruit.aid.domain.seat.presentation.dto.request.ModifySeatReqDto
 import com.grapefruit.aid.domain.seat.service.CreateSeatService
+import com.grapefruit.aid.domain.seat.service.DeleteSeatService
 import com.grapefruit.aid.domain.seat.service.ModifySeatService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -18,7 +20,8 @@ import javax.validation.Valid
 @RequestMapping("/seat")
 class SeatController(
     private val createSeatService: CreateSeatService,
-    private val modifySeatService: ModifySeatService
+    private val modifySeatService: ModifySeatService,
+    private val deleteSeatService: DeleteSeatService
 ) {
     @PostMapping("/{store_id}")
     fun createSeat(@PathVariable("store_id") storeId: Long, @RequestBody @Valid createSeatReqDto: CreateSeatReqDto): ResponseEntity<Void> {
@@ -29,6 +32,12 @@ class SeatController(
     @PatchMapping("/{seat_id}")
     fun modifySeat(@PathVariable("seat_id") seatId: Long, @RequestBody @Valid modifySeatReqDto: ModifySeatReqDto): ResponseEntity<Void> {
         modifySeatService.execute(seatId, modifySeatReqDto)
+        return ResponseEntity.noContent().build()
+    }
+
+    @DeleteMapping("/{seat_id}")
+    fun deleteSeat(@PathVariable("seat_id") seatId: Long): ResponseEntity<Void> {
+        deleteSeatService.execute(seatId)
         return ResponseEntity.noContent().build()
     }
 }
