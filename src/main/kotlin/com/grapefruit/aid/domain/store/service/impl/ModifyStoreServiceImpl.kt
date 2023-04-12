@@ -1,6 +1,5 @@
 package com.grapefruit.aid.domain.store.service.impl
 
-import com.grapefruit.aid.domain.store.entity.Store
 import com.grapefruit.aid.domain.store.exception.UserMismatchException
 import com.grapefruit.aid.domain.store.presentation.dto.request.ModifyStoreReqDto
 import com.grapefruit.aid.domain.store.repository.StoreRepository
@@ -17,8 +16,8 @@ class ModifyStoreServiceImpl(
     private val storeRepository: StoreRepository,
     private val userUtil: UserUtil
 ): ModifyStoreService {
-    override fun execute(modifyStoreReqDto: ModifyStoreReqDto) {
-        val store = storeRepository.findByIdOrNull(modifyStoreReqDto.storeId) ?: throw UserNotFoundException()
+    override fun execute(storeId: Long, modifyStoreReqDto: ModifyStoreReqDto) {
+        val store = storeRepository.findByIdOrNull(storeId) ?: throw UserNotFoundException()
         if(userUtil.currentUser() != store.user)
             throw UserMismatchException()
 
