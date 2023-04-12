@@ -5,6 +5,11 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
 
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 10MB
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,3 +22,13 @@ spring:
 jwt:
   accessSecret: ${ACCESS_SECRET}
   refreshSecret: ${REFRESH_SECRET}
+
+cloud:
+  aws:
+    region:
+      static: ${AWS_REGION}
+    credentials:
+      access-Key: ${AWS_ACCESS}
+      secret-Key: ${AWS_SECRET}
+    s3:
+      bucket: ${AWS_BUCKET_NAME}
