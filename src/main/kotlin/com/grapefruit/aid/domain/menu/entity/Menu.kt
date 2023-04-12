@@ -1,6 +1,8 @@
 package com.grapefruit.aid.domain.menu.entity
 
 import com.grapefruit.aid.domain.menu.presentation.dto.request.CreateMenuReqDto
+import com.grapefruit.aid.domain.menu.presentation.dto.request.ModifyMenuReqDto
+import com.grapefruit.aid.domain.menu.service.ModifyMenuService
 import com.grapefruit.aid.domain.store.entity.Store
 import com.grapefruit.aid.global.entity.BaseIdEntity
 import javax.persistence.*
@@ -26,4 +28,15 @@ class Menu(
         menuImgURL = createMenuReqDto.menuImgUrl,
         store = store
     )
+
+    fun update(modifyMenuReqDto: ModifyMenuReqDto): Menu {
+        val menu = Menu(
+            menuName = modifyMenuReqDto.menuName,
+            description = modifyMenuReqDto.description,
+            menuImgURL = modifyMenuReqDto.menuImgUrl,
+            store = this.store
+        )
+        menu.id = this.id
+        return menu
+    }
 }
