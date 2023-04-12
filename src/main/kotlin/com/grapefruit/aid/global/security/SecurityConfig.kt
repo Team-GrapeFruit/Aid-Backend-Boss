@@ -41,15 +41,36 @@ class SecurityConfig(
                 CorsUtils.isPreFlightRequest(request)
             }).permitAll()
 
+            // user
             .antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
             .antMatchers(HttpMethod.POST, "/auth").permitAll()
             .antMatchers(HttpMethod.PATCH, "/auth").permitAll()
             .antMatchers(HttpMethod.DELETE, "/auth").authenticated()
 
+            // store
             .antMatchers(HttpMethod.POST, "/store").authenticated()
             .antMatchers(HttpMethod.GET, "/store").authenticated()
-            .antMatchers(HttpMethod.PATCH, "/store").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/store").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/store/{store_id}").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/store/{store_id}").authenticated()
+
+            // seat
+            .antMatchers(HttpMethod.POST, "/seat/{store_id}").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/seat/{seat_id}").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/seat/{seat_id}").authenticated()
+            .antMatchers(HttpMethod.GET, "/seat/{store_id}").authenticated()
+
+            // menu
+            .antMatchers(HttpMethod.POST, "/menu/{store_id}").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/menu/{menu_id}").authenticated()
+            .antMatchers(HttpMethod.DELETE, "menu/{menu_id}").authenticated()
+
+            // purchase
+            .antMatchers(HttpMethod.POST, "/purchase/{seat_id}").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/purchase/{seat_id}").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/purchase/food/{seat_id}").authenticated()
+
+            // image
+            .antMatchers(HttpMethod.POST, "/image").authenticated()
             .anyRequest().denyAll()
 
             .and()
