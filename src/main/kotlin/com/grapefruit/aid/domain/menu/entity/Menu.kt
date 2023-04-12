@@ -1,5 +1,6 @@
 package com.grapefruit.aid.domain.menu.entity
 
+import com.grapefruit.aid.domain.menu.presentation.dto.request.CreateMenuReqDto
 import com.grapefruit.aid.domain.store.entity.Store
 import com.grapefruit.aid.global.entity.BaseIdEntity
 import javax.persistence.*
@@ -18,4 +19,11 @@ class Menu(
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "store_id", nullable = false)
     val store: Store
-):BaseIdEntity()
+):BaseIdEntity() {
+    constructor(createMenuReqDto: CreateMenuReqDto, store: Store): this(
+        menuName = createMenuReqDto.menuName,
+        description = createMenuReqDto.description,
+        menuImgURL = createMenuReqDto.menuImgUrl,
+        store = store
+    )
+}
