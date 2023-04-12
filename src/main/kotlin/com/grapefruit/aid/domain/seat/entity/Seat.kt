@@ -1,5 +1,6 @@
 package com.grapefruit.aid.domain.seat.entity
 
+import com.grapefruit.aid.domain.seat.presentation.dto.request.CreateSeatReqDto
 import com.grapefruit.aid.domain.store.entity.Store
 import com.grapefruit.aid.global.entity.BaseIdEntity
 import javax.persistence.*
@@ -16,6 +17,12 @@ class Seat (
     @JoinColumn(name = "store_id", nullable = false)
     val store: Store
 ): BaseIdEntity() {
+    constructor(createSeatReqDto: CreateSeatReqDto, store: Store): this(
+        seatNum = createSeatReqDto.seatNum,
+        customerNum = createSeatReqDto.customerNum,
+        enabled = false,
+        store = store
+    )
     fun updateEnableState(): Seat {
         val updatedSeat = Seat(
             seatNum = this.seatNum,
