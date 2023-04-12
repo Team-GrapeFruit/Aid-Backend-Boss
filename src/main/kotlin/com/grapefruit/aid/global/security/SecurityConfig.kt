@@ -57,17 +57,11 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST, "/seat/{store_id}").authenticated()
             .antMatchers(HttpMethod.PATCH, "/seat/{seat_id}").authenticated()
             .antMatchers(HttpMethod.DELETE, "/seat/{seat_id}").authenticated()
-            .antMatchers(HttpMethod.GET, "/seat/{store_id}").authenticated()
 
             // menu
             .antMatchers(HttpMethod.POST, "/menu/{store_id}").authenticated()
             .antMatchers(HttpMethod.PATCH, "/menu/{menu_id}").authenticated()
             .antMatchers(HttpMethod.DELETE, "menu/{menu_id}").authenticated()
-
-            // purchase
-            .antMatchers(HttpMethod.POST, "/purchase/{seat_id}").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/purchase/{seat_id}").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/purchase/food/{seat_id}").authenticated()
 
             // image
             .antMatchers(HttpMethod.POST, "/image").authenticated()
