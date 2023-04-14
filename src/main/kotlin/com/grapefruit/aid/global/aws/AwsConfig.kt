@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class AwsConfig {
-    @Value("\${cloud.aws.credential.access-Key}")
+    @Value("\${cloud.aws.credentials.access-Key}")
     private val accessKey: String? = null
 
-    @Value("\${cloud.aws.credential.secret-Key}")
+    @Value("\${cloud.aws.credentials.secret-Key}")
     private val secretKey: String? = null
 
     @Value("\${cloud.aws.region.static}")
