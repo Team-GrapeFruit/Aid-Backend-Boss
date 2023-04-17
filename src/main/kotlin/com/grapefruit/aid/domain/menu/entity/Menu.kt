@@ -13,6 +13,8 @@ class Menu(
     @Column(name = "menu_name", nullable = false)
     @field:Size(max = 20)
     val menuName: String,
+    @Column(name = "cost", nullable = false)
+    val cost: Long,
     @Column(name = "description", nullable = false)
     @field:Size(max = 80)
     val description: String,
@@ -24,6 +26,7 @@ class Menu(
 ):BaseIdEntity() {
     constructor(createMenuReqDto: CreateMenuReqDto, store: Store): this(
         menuName = createMenuReqDto.menuName,
+        cost = createMenuReqDto.cost,
         description = createMenuReqDto.description,
         menuImgURL = createMenuReqDto.menuImgUrl,
         store = store
@@ -32,6 +35,7 @@ class Menu(
     fun update(modifyMenuReqDto: ModifyMenuReqDto): Menu {
         val menu = Menu(
             menuName = modifyMenuReqDto.menuName,
+            cost = modifyMenuReqDto.cost,
             description = modifyMenuReqDto.description,
             menuImgURL = modifyMenuReqDto.menuImgUrl,
             store = this.store
