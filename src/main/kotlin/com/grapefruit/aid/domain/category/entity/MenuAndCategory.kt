@@ -1,7 +1,7 @@
-package com.grapefruit.aid.global.entity
+package com.grapefruit.aid.domain.category.entity
 
-import com.grapefruit.aid.domain.category.entity.Category
 import com.grapefruit.aid.domain.menu.entity.Menu
+import com.grapefruit.aid.global.entity.BaseIdEntity
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.FetchType
