@@ -63,6 +63,11 @@ class SecurityConfig(
             .antMatchers(HttpMethod.PATCH, "/menu/{menu_id}").authenticated()
             .antMatchers(HttpMethod.DELETE, "menu/{menu_id}").authenticated()
 
+            // category
+            .antMatchers(HttpMethod.POST, "/category/{store_id}").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/category/{category_id}").authenticated()
+            .antMatchers(HttpMethod.POST, "/category").authenticated()
+
             // image
             .antMatchers(HttpMethod.POST, "/image").authenticated()
             .anyRequest().denyAll()
