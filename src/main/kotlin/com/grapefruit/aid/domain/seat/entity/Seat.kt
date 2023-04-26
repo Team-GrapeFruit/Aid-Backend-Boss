@@ -14,6 +14,10 @@ class Seat (
     val customerNum: Long,
     @Column(nullable = false)
     val enabled: Boolean,
+    @Column(name = "location_x", nullable = false)
+    val locationX: Float,
+    @Column(name = "location_y", nullable = false)
+    val locationY: Float,
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "store_id", nullable = false)
     val store: Store
@@ -21,6 +25,8 @@ class Seat (
     constructor(createSeatReqDto: CreateSeatReqDto, store: Store): this(
         seatNum = createSeatReqDto.seatNum,
         customerNum = createSeatReqDto.customerNum,
+        locationX = createSeatReqDto.locationX,
+        locationY = createSeatReqDto.locationY,
         enabled = false,
         store = store
     )
@@ -30,6 +36,8 @@ class Seat (
             seatNum = modifySeatReqDto.seatNum,
             customerNum = modifySeatReqDto.customerNum,
             enabled = this.enabled,
+            locationX = this.locationX,
+            locationY = this.locationY,
             store = this.store
         )
         seat.id = this.id

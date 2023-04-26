@@ -23,6 +23,7 @@ class CreateSeatServiceImpl(
         val store = storeRepository.findByIdOrNull(storeId) ?: throw SeatNotFoundException()
         if(userUtil.currentUser() != store.user)
             throw UserMismatchException()
+
         seatRepository.save(Seat(createSeatReqDto, store))
     }
 
