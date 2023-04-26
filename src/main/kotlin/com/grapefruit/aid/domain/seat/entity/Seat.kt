@@ -36,8 +36,8 @@ class Seat (
             seatNum = modifySeatReqDto.seatNum,
             customerNum = modifySeatReqDto.customerNum,
             enabled = this.enabled,
-            locationX = this.locationX,
-            locationY = this.locationY,
+            locationX = modifySeatReqDto.locationX,
+            locationY = modifySeatReqDto.locationY,
             store = this.store
         )
         seat.id = this.id
