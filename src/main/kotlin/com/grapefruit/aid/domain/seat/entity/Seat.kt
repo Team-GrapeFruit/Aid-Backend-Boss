@@ -18,7 +18,7 @@ class Seat (
     val locationX: Float,
     @Column(name = "location_y", nullable = false)
     val locationY: Float,
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", nullable = false)
     val store: Store
 ): BaseIdEntity() {

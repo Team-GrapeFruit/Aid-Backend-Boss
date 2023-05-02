@@ -10,10 +10,10 @@ import javax.persistence.*
 class Purchase(
     @Column(name = "quantity", nullable = false)
     val quantity: Long,
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seat_id", nullable = false)
     val seat: Seat,
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id", nullable = false)
     val menu: Menu,
 ): BaseIdEntity()

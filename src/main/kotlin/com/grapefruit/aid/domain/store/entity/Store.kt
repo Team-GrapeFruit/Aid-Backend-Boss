@@ -18,7 +18,7 @@ class Store (
     val information: String,
     @Column(name = "store_img_url", nullable = true)
     val storeImgURL: String? = null,
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     val user: User
 ): BaseIdEntity() {

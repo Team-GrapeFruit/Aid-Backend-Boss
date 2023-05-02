@@ -20,7 +20,7 @@ class Menu(
     val description: String,
     @Column(name = "menu_img_url", nullable = true)
     val menuImgURL: String? = null,
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", nullable = false)
     val store: Store
 ):BaseIdEntity() {

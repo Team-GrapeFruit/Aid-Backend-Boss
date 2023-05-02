@@ -9,7 +9,7 @@ import javax.persistence.*
 class Category(
     @Column(name = "category_name")
     val name: String,
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", nullable = false)
     val store: Store
 ): BaseIdEntity() {
