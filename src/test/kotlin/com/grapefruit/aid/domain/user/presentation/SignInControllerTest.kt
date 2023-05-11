@@ -11,20 +11,17 @@ import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import org.springframework.test.context.web.WebAppConfiguration
 import java.time.ZonedDateTime
 
 @ExtendWith(SpringExtension::class)
-@SpringBootTest
+@WebMvcTest
 @AutoConfigureMockMvc
 class SignInControllerTest: BehaviorSpec({
     val signUpService = mockk<SignUpService>()
@@ -44,12 +41,12 @@ class SignInControllerTest: BehaviorSpec({
                 refreshToken = "refreshToken",
                 expiresAt = ZonedDateTime.now()
             )
-            val result = userController.signIn(signInReqDto)
+            val response = userController.signIn(signInReqDto)
             then("테스트가 한번은 실행되어야 함") {
                 verify(exactly = 1) { signInService.execute(signInReqDto) }
             }
             then("response status should be ok") {
-                result.statusCode shouldBe HttpStatus.OK
+                response.statusCode shouldBe HttpStatus.OK
             }
         }
     }

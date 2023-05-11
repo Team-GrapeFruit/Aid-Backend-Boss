@@ -10,13 +10,11 @@ import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.time.ZonedDateTime
@@ -38,12 +36,12 @@ class TokenRefreshControllerTest: BehaviorSpec({
                 refreshToken = "newRefreshToken",
                 expiresAt = ZonedDateTime.now()
             )
-            val result = userController.tokenRefresh("refreshToken")
+            val response = userController.tokenRefresh("refreshToken")
             then("서비스가 한번은 실행되어야 함") {
                 verify(exactly = 1) { tokenRefreshService.execute("refreshToken") }
             }
             then("response status should be ok") {
-                result.statusCode shouldBe HttpStatus.OK
+                response.statusCode shouldBe HttpStatus.OK
             }
         }
     }

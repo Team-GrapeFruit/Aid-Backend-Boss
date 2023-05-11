@@ -12,14 +12,13 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import org.springframework.test.context.web.WebAppConfiguration
 
 
 @ExtendWith(SpringExtension::class)
-@SpringBootTest
+@WebMvcTest
 @AutoConfigureMockMvc
 class SignUpControllerTest: BehaviorSpec({
     val signUpService = mockk<SignUpService>()
@@ -36,13 +35,13 @@ class SignUpControllerTest: BehaviorSpec({
         )
         `when`("요청이 왔을 때") {
             every { signUpService.execute(signUpReqDto) } returns Unit
-            val result = userController.signUp(signUpReqDto)
+            val response = userController.signUp(signUpReqDto)
 
             then("서비스가 한 번은 실행되어야 함") {
                 verify(exactly = 1) { signUpService.execute((signUpReqDto)) }
             }
             then("response status should be ok") {
-                result.statusCode shouldBe HttpStatus.CREATED
+                response.statusCode shouldBe HttpStatus.CREATED
             }
         }
     }
