@@ -1,6 +1,5 @@
 package com.grapefruit.aid.domain.user.presentation
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.grapefruit.aid.domain.user.presentation.dto.request.SignUpReqDto
 import com.grapefruit.aid.domain.user.service.SignInService
 import com.grapefruit.aid.domain.user.service.SignUpService
@@ -11,16 +10,13 @@ import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpStatus
-import org.springframework.test.context.junit.jupiter.SpringExtension
-import org.springframework.test.context.web.WebAppConfiguration
 
-@ExtendWith(SpringExtension::class)
-@WebAppConfiguration
-@WebMvcTest(UserController::class)
+
+@SpringBootTest
+@AutoConfigureMockMvc
 class SignUpControllerTest: BehaviorSpec({
 
     val signUpService = mockk<SignUpService>()
@@ -28,7 +24,6 @@ class SignUpControllerTest: BehaviorSpec({
     val tokenRefreshService = mockk<TokenRefreshService>()
     val userDeleteService = mockk<UserDeleteService>()
     val userController = UserController(signUpService, signInService, tokenRefreshService, userDeleteService)
-    val objectMapper = ObjectMapper()
 
     given("회원가입 시도 시") {
         val signUpReqDto = SignUpReqDto(
