@@ -13,10 +13,4 @@ class User (
     val password: String,
     @Column(nullable = false)
     val name: String
-) {
-    constructor(signUpReqDto: SignUpReqDto, encodedPassword: String): this(
-        id = signUpReqDto.id,
-        password = encodedPassword,
-        name = signUpReqDto.name
-    )
-}
+)

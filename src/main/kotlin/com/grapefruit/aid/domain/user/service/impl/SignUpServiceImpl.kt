@@ -19,7 +19,10 @@ class SignUpServiceImpl(
         if(userRepository.existsById(signUpReqDto.id))
             throw UserDuplicateException()
         val encodedPassword: String = passwordEncoder.encode(signUpReqDto.password)
-        val user: User = User(signUpReqDto, encodedPassword)
+        val user = User(
+            id = signUpReqDto.id,
+            name = signUpReqDto.name,
+            password = encodedPassword)
         userRepository.save(user)
     }
 }
