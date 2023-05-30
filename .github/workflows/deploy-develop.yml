@@ -1,0 +1,56 @@
+name: Deploy to cloudtype
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: taeo0328/grapefruit
+          stage: main
+          yaml: |
+            name: aid-backend-boss
+            app: java@11
+            options:
+              ports: 8080
+              env:
+                - name: DB_URL
+                  value: svc.sel3.cloudtype.app:32186
+                - name: DB_NAME
+                  value: aid-server
+                - name: DB_USER
+                  value: root
+                - name: DB_PASSWORD
+                  value: rlaxodh0328
+                - name: REDIS_HOST
+                  value: svc.sel3.cloudtype.app
+                - name: REDIS_PORT
+                  value: "32022"
+                - name: ACCESS_SECRET
+                  value: iUuQhCPhJiVpRoDIQwVpO+YqUQKkuqjGhLfEzjta3UI=
+                - name: REFRESH_SECRET
+                  value: 8lxg67U5mxIVGLPDQrc3c/z9lzv8eSNU2AWw2OCp6eU=
+                - name: AWS_ACCESS
+                  value: AKIA4GPC3H7TAQRAAQMA
+                - name: AWS_SECRET
+                  value: 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
+                - name: AWS_BUCKET_NAME
+                  value: aid-image-bucket
+                - name: AWS_REGION
+                  value: ap-northeast-2
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
